@@ -1,0 +1,11 @@
+#welcome {
+
+    color: green;
+    background-color: silver;
+    border-radius: 20px;
+    border-width: 2px;
+    border-style: solid;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    max-width: 50%;
+}

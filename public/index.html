@@ -1,28 +1,50 @@
-
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event List</title>
+    <title>Kalenteri</title>
+    <link rel="stylesheet" href="style.css"/>
 </head>
+
+
 <body>
-    <h1>Event List</h1>
-    <ul id="eventList"></ul>
+
+    <h1 class="hidden"Kalenteri</h1>
+
+    <h2 id="welcome">Tapahtumat</h2>
+
+
+    <div id="eventList"></div>
+  
 
     <script>
         
-        fetch('/events')
-            .then(response => response.json())
-            .then(data => {
-                const eventList = document.getElementById('eventList');
-                data.forEach(event => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `${event.id} - ${event.userId} - ${event.title} - ${event.description} - ${event.startDate} - ${event.endDate} - ${event.endTime}`;
-                    eventList.appendChild(listItem);
-                });
-            })
-            .catch(error => console.error('Error fetching events:', error));
+        async function fetchData() {
+
+        var x = `<table><thead><th>Tapahtuman nimi</th><th>Aloitus pvm</th><th>Aloitus aika</th><th>Loppu pvm</th><th>Loppu aika</th></thead><tbody>`
+        
+        try {
+            const response = await fetch ("http://localhost:3000/events")
+            const eventdata = await response.json()
+            
+            await eventdata.map(h => {
+                    x += `<tr><td>${h.title}</td><td>${h.startDate}</td><td>${h.startTime}</td><td>${h.endTime}</td><td>${h.endDate}</td></tr>`
+                    })
+                    
+                    x += `</tbody></table>`
+                    document.getElementById('eventList').innerHTML = x
+            }
+            
+            
+          catch (error) {
+                console.error("Error fetching data:", error)
+                
+          }
+          
+        }
+          fetchData()
+
     </script>
 </body>
 </html>
