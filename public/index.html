@@ -9,15 +9,15 @@
 
 
 <body>
-
+  <center>
     <h1 class="hidden"Kalenteri</h1>
 
     <h2 id="welcome">Tapahtumat</h2>
 
 
     <div id="eventList"></div>
-  
-
+  </center>
+  <a href="http://localhost:3000/events">LINK</a>
     <script>
         
         async function fetchData() {
@@ -25,6 +25,9 @@
         var x = `<table><thead><th>Tapahtuman nimi</th><th>Aloitus pvm</th><th>Aloitus aika</th><th>Loppu pvm</th><th>Loppu aika</th></thead><tbody>`
         
         try {
+
+            //hakee tiedot alla mainitusta localhost osoitteesta, johon palvelinm express on ne ensin lähettänyt
+
             const response = await fetch ("http://localhost:3000/events")
             const eventdata = await response.json()
             
